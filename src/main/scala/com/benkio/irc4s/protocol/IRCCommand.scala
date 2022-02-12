@@ -2,7 +2,7 @@ package com.benkio.irc4s.protocol
 
 sealed trait IRCCommand
 case object QuitCommand                                extends IRCCommand
-final case class SendPrivateMessage(recipient: String) extends IRCCommand
+final case class SendPrivateMessageCommand(recipient: String) extends IRCCommand
 final case class JoinChannelCommand(channel: String)   extends IRCCommand
 object JoinChannelCommand {
 

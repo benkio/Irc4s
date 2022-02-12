@@ -3,7 +3,7 @@ package com.benkio.irc4s.client
 import com.benkio.irc4s.protocol.IRCCommand
 import com.benkio.irc4s.protocol.QuitCommand
 import com.benkio.irc4s.protocol.JoinChannelCommand
-import com.benkio.irc4s.protocol.SendPrivateMessage
+import com.benkio.irc4s.protocol.SendPrivateMessageCommand
 import com.comcast.ip4s.Host
 import com.comcast.ip4s.Port
 import com.comcast.ip4s.SocketAddress
@@ -43,5 +43,5 @@ object IRCClient:
     } yield ()
     def sendCommand(command: IRCCommand, message: Option[String]): F[Unit] = ???
     def sendMessageTo(recepient: String, message: String): F[Unit] =
-      sendCommand(SendPrivateMessage(recepient), Some(message))
+      sendCommand(SendPrivateMessageCommand(recepient), Some(message))
     def readMessages(): Stream[F, String] = ???
