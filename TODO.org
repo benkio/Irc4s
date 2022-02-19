@@ -1,0 +1,10 @@
+* TODO-List
+
+  + ~Recepient.scala~ complete the implementation
+  + Add tests for ~Recepient.scala~ (with scalacheck)
+  + ~IRCCommand.scala~ complete implementation
+  + Add test ~IRCCommand.scala~
+
+* Reference Links
+
+  https://datatracker.ietf.org/doc/html/rfc2812#section-1.3
