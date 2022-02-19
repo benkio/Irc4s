@@ -19,6 +19,7 @@ object Dependencies {
     val catsEffect      = "3.3.5"
     val comcast         = "3.1.2"
     val munitCatsEffect = "1.0.7"
+    val munitScalacheck = "0.7.29"
     val fs2             = "3.2.4"
     val log4cats        = "2.2.0"
   }
@@ -33,6 +34,7 @@ object Dependencies {
     val catsEffectStd   = "org.typelevel" %% "cats-effect-std"     % Versions.catsEffect
     val comcast         = "com.comcast"   %% "ip4s-core"           % Versions.comcast
     val munitCatsEffect = "org.typelevel" %% "munit-cats-effect-3" % Versions.munitCatsEffect % Test
+    val munitScalacheck = "org.scalameta" %% "munit-scalacheck"    % Versions.munitScalacheck % Test
     val fs2Core         = "co.fs2"        %% "fs2-core"            % Versions.fs2
     val fs2IO           = "co.fs2"        %% "fs2-io"              % Versions.fs2
     val log4cats        = "org.typelevel" %% "log4cats-slf4j"      % Versions.log4cats
@@ -46,6 +48,7 @@ object Dependencies {
     Libs.fs2Core,
     Libs.fs2IO,
     Libs.log4cats,
-    Libs.munitCatsEffect
+    Libs.munitCatsEffect,
+    Libs.munitScalacheck
   )
 }
