@@ -1,7 +1,9 @@
 package com.benkio.irc4s.protocol
 
 import com.benkio.irc4s.protocol.Channel.InvalidChannelPrefix
-import cats.data.Validated.{Valid, Invalid}
+import com.benkio.irc4s.protocol.Channel.InvalidChannelLength
+import cats.data.Validated.Valid
+import cats.data.Validated.Invalid
 import cats.data.NonEmptyList
 import munit.ScalaCheckSuite
 import org.scalacheck.Prop._
@@ -17,8 +19,14 @@ class RecepientSpec extends ScalaCheckSuite {
   }
 
   property("A channel is not created if the input has invalid prefix") {
-    forAll(invalidChannelName_badPrefix) { (v:String) =>
+    forAll(invalidChannelName_badPrefix) { (v: String) =>
       assert(Channel(v) == Invalid(NonEmptyList.one(InvalidChannelPrefix(v))))
+    }
+  }
+
+  property("A channel is not created if the input is too long") {
+    forAll(invalidChannelName_tooLong) { (v: String) =>
+      assert(Channel(v) == Invalid(NonEmptyList.one(InvalidChannelLength(v))))
     }
   }
 }
