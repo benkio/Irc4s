@@ -2,6 +2,7 @@ package com.benkio.irc4s.protocol
 
 import com.benkio.irc4s.protocol.Channel.InvalidChannelPrefix
 import com.benkio.irc4s.protocol.Channel.InvalidChannelLength
+import com.benkio.irc4s.protocol.Channel.InvalidChannelName
 import cats.data.Validated.Valid
 import cats.data.Validated.Invalid
 import cats.data.NonEmptyList
@@ -27,6 +28,12 @@ class RecepientSpec extends ScalaCheckSuite {
   property("A channel is not created if the input is too long") {
     forAll(invalidChannelName_tooLong) { (v: String) =>
       assert(Channel(v) == Invalid(NonEmptyList.one(InvalidChannelLength(v))))
+    }
+  }
+
+  property("A channel is not created if the input contains an invalid char") {
+    forAll(invalidChannelName_invalidChar) { (v: String) =>
+      assert(Channel(v) == Invalid(NonEmptyList.one(InvalidChannelName(v))))
     }
   }
 }

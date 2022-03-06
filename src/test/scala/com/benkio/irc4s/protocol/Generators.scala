@@ -32,11 +32,16 @@ object Generators {
     } yield channelName
 
     val invalidChannelName_invalidChar: Gen[String] = for {
-      prefix <- Gen.oneOf[String](validChannelPrefix)
-      channelName <- Gen.alphaStr.filter(v =>
-        v.length <= maxChannelLength && List(' ', ',', ':', 7.toChar).exists(x => v.contains(x))
-      )
-    } yield prefix ++ channelName
+      prefix            <- Gen.oneOf[String](validChannelPrefix)
+      channelName       <- Gen.alphaStr.filter(v => v.length <= maxChannelLength - 1)
+      index             <- Gen.chooseNum(1, (channelName.length - 1).max(1))
+      invalidStringChar <- Gen.oneOf[String](invalidChannelCharacters)
+    } yield {
+      val cn = prefix ++ channelName
+      if (index < cn.length)
+        cn.updated(index, invalidStringChar(0))
+      else cn :+ invalidStringChar(0)
+    }
 
   }
 
