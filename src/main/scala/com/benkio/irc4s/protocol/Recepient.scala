@@ -7,7 +7,17 @@ import cats.implicits._
 sealed trait Recepient
 final case class Nickname(value: String) extends Recepient
 object Nickname {
-  def apply(value: String): Either[Throwable, Nickname] = ???
+  // https://datatracker.ietf.org/doc/html/rfc2812#section-2.3.1
+
+  // Idea:
+  // - Create a validated for the length
+  // - Create a validated for the first char
+  // - Create a validated for the other chars
+  // - When validate, check the length then zip the string with a list
+  //   of validated per char. validate the single chars one by one and
+  //   fold the list somehow.
+
+  def apply(value: String): ValidatedNel[Throwable, Nickname] = ???
 }
 
 final case class Channel private[protocol] (value: String) extends Recepient

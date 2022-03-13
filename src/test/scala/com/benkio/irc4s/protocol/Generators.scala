@@ -43,6 +43,12 @@ object Generators {
       else cn :+ invalidStringChar(0)
     }
 
+    val invalidChannelName: Gen[String] = Gen.oneOf(
+      invalidChannelName_badPrefix,
+      invalidChannelName_invalidChar,
+      invalidChannelName_tooLong
+    )
+
   }
 
 }

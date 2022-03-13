@@ -11,6 +11,8 @@ import org.scalacheck.Prop._
 
 class RecepientSpec extends ScalaCheckSuite {
 
+  // Channel //////////////////////////////////////////////////////////////////
+
   import Generators.Channel._
 
   property("A channel is created successfully when the input is valid") {
@@ -34,6 +36,12 @@ class RecepientSpec extends ScalaCheckSuite {
   property("A channel is not created if the input contains an invalid char") {
     forAll(invalidChannelName_invalidChar) { (v: String) =>
       assert(Channel(v) == Invalid(NonEmptyList.one(InvalidChannelName(v))))
+    }
+  }
+
+  property("A channel is not created if the input: contains an invalid char or is too long or has a bad prefix") {
+    forAll(invalidChannelName) { (v: String) =>
+      assert(Channel(v).isInvalid)
     }
   }
 }
